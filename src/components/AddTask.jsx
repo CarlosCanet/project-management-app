@@ -1,16 +1,28 @@
 
+import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
-function AddTask() {
+function AddTask({projectId, getData}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const navigate = useNavigate();
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // ...logic for creating a new Task should be here
     // ... the ID of the Project should be part of the Task data
-
+    const newTask = { title, description, projectId };
+    try {
+      await axios.post(`${import.meta.env.VITE_SERVER_URL}/tasks`, newTask);
+      getData();
+      setTitle("");
+      setDescription("");
+    } catch (error) {
+      console.log(error)
+      navigate("/error");
+    }
   };
   
   return (

@@ -1,13 +1,13 @@
 import { Link } from "react-router";
 
-function ProjectCard () {
+function ProjectCard ({title, description, id}) {
   
   return (
     <div className="ProjectCard card">
-      <Link to={``}>
-        <h3>PROJECT_TITLE_HERE</h3>
+      <Link to={`/projects/${id}`}>
+        <h3>{title}</h3>
       </Link>
-      <p>PROJECT_DESCRIPTION_HERE</p>
+      <p>{description}</p>
     </div>
   );
 }
